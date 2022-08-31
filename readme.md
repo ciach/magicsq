@@ -8,7 +8,7 @@ Potem:
 `chmod +x magicsq.py`
 
 Zainstaluj wymagane pakiety:
-`python -m pip install -r requirements.txt`
+`python -m pip install -r requirements.list`
 
 Odpal:
 `./magicsq.py`
@@ -16,6 +16,6 @@ Odpal:
 Trwa pare minut, generuje kwadraty do **out2.txt**
 Powinno byc 2500, w sumie nie wiem czy sie powtarzaja. Nie powinny.
 
-Plik wejsciowy zmieniasz w lini 151
+Plik wejsciowy zmieniasz w lini 151.  
 Plik wyjsciowy zmieniasz w lini 152
 
