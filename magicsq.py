@@ -1,17 +1,19 @@
-"""_summary_
+#!/usr/bin/env python3
+"""
+Creates magic squares from words from input file
 
-VELKI
-ENAIM
-LASTA
-KITIM
-IMAMO
-
+Desired usage:
+    magicsq.py INPUT_FILE OUTPUT_FILE
 
 """
 
 from pathlib import Path
 from sys import exit as sys_exit
 from fnmatch import filter as fn_filter
+from rich.traceback import install
+from rich.progress import track
+
+install()
 
 
 def read_file_to_list(
@@ -28,10 +30,14 @@ def read_file_to_list(
         words_list (list): containing words as elements
     """
     words_list = []
-    with open(Path(file_name), "r", encoding="utf-8") as file:
-        for line in file:
-            words_list.append(line)
-    file.close()
+    try:
+        with open(Path(file_name), "r", encoding="utf-8") as file:
+            for line in file:
+                words_list.append(line)
+        file.close()
+    except TypeError:
+        print("TypeError: input file not defined!")
+        sys_exit(1)
     return words_list
 
 
@@ -41,6 +47,10 @@ def write_line_to_file(file_name, line):
     Args:
         file_name (str): File name to write to
         line (str): Content to write to file
+
+    Returns
+    -------
+    Nothing
     """
 
     with open(file_name, "a", encoding="utf8") as file:
@@ -56,19 +66,13 @@ def make_magic_squares(words_list, output_file) -> list:
         word_number (_type_): _description_
 
     Returns:
-        list: _description_
-
-    VELKI
-    ENAIM
-    LASTA
-    KITIM
-    IMAMO
+        str: number of magic squares created
 
     """
 
     # first_word = [words_list[word_number].rstrip()]  # that's the list of length 1
     no_of_magic_sq = 0
-    for first_word in words_list:
+    for first_word in track(words_list, description="Processing..."):
         if first_word:
             second_words = find_next_word(words_list, f"{first_word[1]}*")
             if second_words:
@@ -80,13 +84,20 @@ def make_magic_squares(words_list, output_file) -> list:
                         for word_of_third_words in third_words:
                             forth_words = find_next_word(
                                 words_list,
-                                f"{first_word[3]}{word_of_second_words[3]}{word_of_third_words[3]}*",
+                                first_word[3]
+                                + word_of_second_words[3]
+                                + word_of_third_words[3]
+                                + "*",
                             )
                             if forth_words:
                                 for word_of_forth_words in forth_words:
                                     fifth_words = find_next_word(
                                         words_list,
-                                        f"{first_word[4]}{word_of_second_words[4]}{word_of_third_words[4]}{word_of_forth_words[4]}*",
+                                        first_word[4]
+                                        + word_of_second_words[4]
+                                        + word_of_third_words[4]
+                                        + word_of_forth_words[4]
+                                        + "*",
                                     )
                                     if fifth_words:
                                         for word_of_fifth_words in fifth_words:
@@ -113,11 +124,10 @@ def make_magic_squares(words_list, output_file) -> list:
                     else:
                         pass
             else:
-                print(f"No second words found in file {words_list}")
-                sys_exit(1)
+                print("No second words found in file!")
 
         else:
-            print(f"No words found in file {words_list}")
+            print("No words found in file!")
             sys_exit(1)
     return f"Number of magic squares: {no_of_magic_sq}"
 
@@ -139,9 +149,5 @@ def find_next_word(words_list, part_string):
 
 if __name__ == "__main__":
     lista = read_file_to_list("5.txt")
-    words_lists = make_magic_squares(lista, "out.txt")
+    words_lists = make_magic_squares(lista, "out2.txt")
     print(words_lists)
-#    for i in enumerate(lista):
-#        words_lists = make_magic_squares(lista, i[0])
-#        asd = words_mix(words_lists)
-#        check_sq(asd)
