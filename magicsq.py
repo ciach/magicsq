@@ -9,10 +9,8 @@ IMAMO
 
 """
 
-from dataclasses import asdict
 from pathlib import Path
 import sys
-import itertools
 import fnmatch
 
 
@@ -85,9 +83,6 @@ def make_magic_squares(words_list, word_number, output_file) -> list:
                                     )
                                     if fifth_words:
                                         for word_of_fifth_words in fifth_words:
-                                            # print(
-                                            #    f"{first_word.rstrip()}\n{word_of_second_words}\n{word_of_third_words}\n{word_of_forth_words}\n{word_of_fifth_words}\n"
-                                            # )
                                             write_line_to_file(
                                                 output_file, first_word.rstrip()
                                             )
