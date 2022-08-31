@@ -36,7 +36,7 @@ def read_file_to_list(
 
 
 def write_line_to_file(file_name, line):
-    hs = open(file_name, "a")
+    hs = open(file_name, "a", encoding="utf8")
     hs.write(line + "\n")
     hs.close()
 
