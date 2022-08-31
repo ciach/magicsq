@@ -10,8 +10,8 @@ IMAMO
 """
 
 from pathlib import Path
-import sys
-import fnmatch
+from sys import exit as sys_exit
+from fnmatch import filter as fn_filter
 
 
 def read_file_to_list(
@@ -107,16 +107,16 @@ def make_magic_squares(words_list, word_number, output_file) -> list:
                         pass
             else:
                 print(f"No second words found in file {words_list}")
-                sys.exit(1)
+                sys_exit(1)
 
         else:
             print(f"No words found in file {words_list}")
-            sys.exit(1)
+            sys_exit(1)
     return f"Number of magic squares: {no_of_magic_sq}"
 
 
 def find_next_word(words_list, part_string):
-    return_list = fnmatch.filter(words_list, part_string)
+    return_list = fn_filter(words_list, part_string)
     return [s.strip() for s in return_list]
 
 
