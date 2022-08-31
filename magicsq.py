@@ -62,6 +62,7 @@ def make_magic_squares(words_list, word_number, output_file) -> list:
     """
 
     # first_word = [words_list[word_number].rstrip()]  # that's the list of length 1
+    no_of_magic_sq = 0
     for first_word in words_list:
         if first_word:
             second_words = find_next_word(words_list, f"{first_word[1]}*")
@@ -84,9 +85,9 @@ def make_magic_squares(words_list, word_number, output_file) -> list:
                                     )
                                     if fifth_words:
                                         for word_of_fifth_words in fifth_words:
-                                            print(
-                                                f"{first_word.rstrip()}\n{word_of_second_words}\n{word_of_third_words}\n{word_of_forth_words}\n{word_of_fifth_words}\n"
-                                            )
+                                            # print(
+                                            #    f"{first_word.rstrip()}\n{word_of_second_words}\n{word_of_third_words}\n{word_of_forth_words}\n{word_of_fifth_words}\n"
+                                            # )
                                             write_line_to_file(
                                                 output_file, first_word.rstrip()
                                             )
@@ -102,6 +103,7 @@ def make_magic_squares(words_list, word_number, output_file) -> list:
                                             write_line_to_file(
                                                 output_file, word_of_fifth_words + "\n"
                                             )
+                                            no_of_magic_sq += 1
                                     else:
                                         pass
                             else:
@@ -115,6 +117,7 @@ def make_magic_squares(words_list, word_number, output_file) -> list:
         else:
             print(f"No words found in file {words_list}")
             sys.exit(1)
+    return f"Number of magic squares: {no_of_magic_sq}"
 
 
 def find_next_word(words_list, part_string):
