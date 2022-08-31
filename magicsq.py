@@ -61,58 +61,60 @@ def make_magic_squares(words_list, word_number, output_file) -> list:
 
     """
 
-    first_word = [words_list[word_number].rstrip()]  # that's the list of length 1
+    # first_word = [words_list[word_number].rstrip()]  # that's the list of length 1
+    for first_word in words_list:
+        if first_word:
+            second_words = find_next_word(words_list, f"{first_word[1]}*")
+            if second_words:
+                for word_of_second_words in second_words:
+                    third_words = find_next_word(
+                        words_list, f"{first_word[2]}{word_of_second_words[2]}*"
+                    )
+                    if third_words:
+                        for word_of_third_words in third_words:
+                            forth_words = find_next_word(
+                                words_list,
+                                f"{first_word[3]}{word_of_second_words[3]}{word_of_third_words[3]}*",
+                            )
+                            if forth_words:
+                                for word_of_forth_words in forth_words:
+                                    fifth_words = find_next_word(
+                                        words_list,
+                                        f"{first_word[4]}{word_of_second_words[4]}{word_of_third_words[4]}{word_of_forth_words[4]}*",
+                                    )
+                                    if fifth_words:
+                                        for word_of_fifth_words in fifth_words:
+                                            print(
+                                                f"{first_word.rstrip()}\n{word_of_second_words}\n{word_of_third_words}\n{word_of_forth_words}\n{word_of_fifth_words}\n"
+                                            )
+                                            write_line_to_file(
+                                                output_file, first_word.rstrip()
+                                            )
+                                            write_line_to_file(
+                                                output_file, word_of_second_words
+                                            )
+                                            write_line_to_file(
+                                                output_file, word_of_third_words
+                                            )
+                                            write_line_to_file(
+                                                output_file, word_of_forth_words
+                                            )
+                                            write_line_to_file(
+                                                output_file, word_of_fifth_words + "\n"
+                                            )
+                                    else:
+                                        pass
+                            else:
+                                pass
+                    else:
+                        pass
+            else:
+                print(f"No second words found in file {words_list}")
+                sys.exit(1)
 
-    if first_word:
-        second_words = find_next_word(words_list, f"{first_word[0][1]}*")
-        if second_words:
-            for word_of_second_words in second_words:
-                third_words = find_next_word(
-                    words_list, f"{first_word[0][2]}{word_of_second_words[2]}*"
-                )
-                if third_words:
-                    for word_of_third_words in third_words:
-                        forth_words = find_next_word(
-                            words_list,
-                            f"{first_word[0][3]}{word_of_second_words[3]}{word_of_third_words[3]}*",
-                        )
-                        if forth_words:
-                            for word_of_forth_words in forth_words:
-                                fifth_words = find_next_word(
-                                    words_list,
-                                    f"{first_word[0][4]}{word_of_second_words[4]}{word_of_third_words[4]}{word_of_forth_words[4]}*",
-                                )
-                                if fifth_words:
-                                    for word_of_fifth_words in fifth_words:
-                                        print(
-                                            f"{first_word[0]}\n{word_of_second_words}\n{word_of_third_words}\n{word_of_forth_words}\n{word_of_fifth_words}\n"
-                                        )
-                                        write_line_to_file(output_file, first_word[0])
-                                        write_line_to_file(
-                                            output_file, word_of_second_words
-                                        )
-                                        write_line_to_file(
-                                            output_file, word_of_third_words
-                                        )
-                                        write_line_to_file(
-                                            output_file, word_of_forth_words
-                                        )
-                                        write_line_to_file(
-                                            output_file, word_of_fifth_words + "\n"
-                                        )
-                                else:
-                                    pass
-                        else:
-                            pass
-                else:
-                    pass
         else:
-            print(f"No second words found in file {words_list}")
+            print(f"No words found in file {words_list}")
             sys.exit(1)
-
-    else:
-        print(f"No words found in file {words_list}")
-        sys.exit(1)
 
 
 def find_next_word(words_list, part_string):
