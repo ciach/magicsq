@@ -36,6 +36,13 @@ def read_file_to_list(
 
 
 def write_line_to_file(file_name, line):
+    """Writes line to file with a new line
+
+    Args:
+        file_name (str): File name to write to
+        line (str): Content to write to file
+    """
+
     with open(file_name, "a", encoding="utf8") as file:
         file.write(line + "\n")
     file.close()
@@ -116,6 +123,16 @@ def make_magic_squares(words_list, output_file) -> list:
 
 
 def find_next_word(words_list, part_string):
+    """Finds string in words_list which is maching the pattern from part_string
+
+    Args:
+        words_list (list): list of words to check
+        part_string (str): patter to match
+
+    Returns:
+        list: of words matching pattern
+    """
+
     return_list = fn_filter(words_list, part_string)
     return [s.strip() for s in return_list]
 
