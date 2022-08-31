@@ -41,7 +41,7 @@ def write_line_to_file(file_name, line):
     hs.close()
 
 
-def make_magic_squares(words_list, word_number, output_file) -> list:
+def make_magic_squares(words_list, output_file) -> list:
     """Returns list of lists with words starting
 
     Args:
@@ -122,7 +122,7 @@ def find_next_word(words_list, part_string):
 
 if __name__ == "__main__":
     lista = read_file_to_list("5.txt")
-    words_lists = make_magic_squares(lista, 1527, "out.txt")
+    words_lists = make_magic_squares(lista, "out.txt")
     print(words_lists)
 #    for i in enumerate(lista):
 #        words_lists = make_magic_squares(lista, i[0])
