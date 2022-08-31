@@ -1,8 +1,10 @@
+Wymaga: `Python 3.10.5`
+
 W terminalu wpisz:
 `git clone https://github.com/ciach/magicsq.git`
 
 Potem:
-`cd magicsq`
+`cd magicsq`\ 
 `chmod +x magicsq.py`
 
 Zainstaluj wymagane pakiety:
