@@ -19,7 +19,7 @@ from fnmatch import filter as fn_filter
 
 def read_file_to_list(
     file_name,
-) -> list:
+):
     """_Opens file with given file name. Assumes file is in the same folder.
     File name is given as an parameter for script execution.
     Returns list with words as elements._
@@ -59,7 +59,7 @@ def write_line_to_file(file_name, line):
     file.close()
 
 
-def make_magic_squares(words_list, output_file) -> list:
+def make_magic_squares(words_list, output_file):
     """Returns list of lists with words starting
 
     Args:
