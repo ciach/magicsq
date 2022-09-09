@@ -137,7 +137,7 @@ def make_magic_squares(words_list, output_file) -> list:
                                                     )
                                                     write_line_to_file(
                                                         output_file,
-                                                        word_of_fifth_words + "\n",
+                                                        word_of_fifth_words,
                                                     )
                                                     write_line_to_file(
                                                         output_file,
