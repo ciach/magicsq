@@ -1,0 +1,158 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.App-header {
+  margin-bottom: 30px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.square-selector {
+  margin-bottom: 20px;
+}
+
+.square-selector select {
+  padding: 8px;
+  margin-left: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.board-row {
+  display: flex;
+  height: 60px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.board-row:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+.board-row.hovered {
+  background-color: #f0f0f0;
+}
+
+.board-row.completed {
+  background-color: #e6ffe6;
+}
+
+.board-cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-right: 1px solid #ccc;
+  transition: background-color 0.3s;
+}
+
+.board-cell.completed-col {
+  background-color: #e6ffe6;
+}
+
+.board-cell.hovered-col {
+  background-color: #f0f0f0;
+}
+
+/* When both row and column are hovered (intersection) */
+.board-row.hovered .board-cell.hovered-col {
+  background-color: #e0e0e0;
+}
+
+.board-row.completed .board-cell.completed-col {
+  background-color: #ccffcc;
+}
+
+.board-cell:last-child {
+  border-right: none;
+}
+
+.prompt-box {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.input-box {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.input-box input {
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 150px;
+  text-transform: uppercase;
+}
+
+.input-box button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.input-box button:hover {
+  background-color: #45a049;
+}
+
+.incorrect-words {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fff0f0;
+  border: 1px solid #ffcccc;
+  border-radius: 4px;
+  max-width: 500px;
+}
+
+.incorrect-words h3 {
+  margin-top: 0;
+  color: #d32f2f;
+}
+
+.incorrect-words ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: #d32f2f;
+  margin: 5px 0;
+}
