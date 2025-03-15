@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import magicSquaresData from './pl_magic_squares.json';
 import magicSquaresPrompts from './pl_magic_squares_pytania.json';
@@ -25,6 +25,10 @@ function App() {
   const [incorrectWords, setIncorrectWords] = useState<string[]>([]);
   const [completedRows, setCompletedRows] = useState<number[]>([]);
   const [completedCols, setCompletedCols] = useState<number[]>([]);
+  
+  // Create refs for the board and input elements
+  const boardRef = useRef<HTMLDivElement>(null);
+  const inputBoxRef = useRef<HTMLDivElement>(null);
 
   // Type assertions to ensure TypeScript recognizes our data structure
   const squares = magicSquaresData as MagicSquaresData;
@@ -49,6 +53,31 @@ function App() {
     setSelectedRow(rowIndex);
     setInputWord("");
   };
+
+  // Handle document click to dismiss input field when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // If input is open and click is outside the board and input box
+      if (
+        selectedRow !== null && 
+        boardRef.current && 
+        inputBoxRef.current && 
+        !boardRef.current.contains(event.target as Node) && 
+        !inputBoxRef.current.contains(event.target as Node)
+      ) {
+        setSelectedRow(null);
+        setInputWord("");
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    // Clean up the event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [selectedRow]);
 
   // Handle word submission
   const handleSubmitWord = () => {
@@ -119,11 +148,22 @@ function App() {
       
       <main>
         <div className="game-container">
-          <div className="board">
+          {/* Hint box above the board - always present but only shows content when hovering or selected */}
+          <div className="prompt-box">
+            {hoveredRow !== null ? (
+              <p>{currentPrompts[hoveredRow.toString()]}</p>
+            ) : selectedRow !== null ? (
+              <p>{currentPrompts[selectedRow.toString()]}</p>
+            ) : (
+              <p className="placeholder-text">Hover over a row to see the hint</p>
+            )}
+          </div>
+          
+          <div className="board" ref={boardRef}>
             {board.map((row, rowIndex) => (
               <div 
                 key={rowIndex} 
-                className={`board-row ${hoveredRow === rowIndex ? 'hovered' : ''} ${completedRows.includes(rowIndex) ? 'completed' : ''}`}
+                className={`board-row ${hoveredRow === rowIndex ? 'hovered' : ''} ${completedRows.includes(rowIndex) ? 'completed' : ''} ${selectedRow === rowIndex ? 'selected' : ''}`}
                 onMouseEnter={() => handleRowHover(rowIndex)}
                 onMouseLeave={() => handleRowHover(null)}
                 onClick={() => handleRowClick(rowIndex)}
@@ -140,14 +180,9 @@ function App() {
             ))}
           </div>
           
-          {hoveredRow !== null && selectedRow === null && (
-            <div className="prompt-box">
-              <p>{currentPrompts[hoveredRow.toString()]}</p>
-            </div>
-          )}
-          
+          {/* Input box below the board */}
           {selectedRow !== null && (
-            <div className="input-box">
+            <div className="input-box" ref={inputBoxRef}>
               <input 
                 type="text" 
                 value={inputWord} 

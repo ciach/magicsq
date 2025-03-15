@@ -33,12 +33,37 @@ h1 {
   gap: 20px;
 }
 
+.prompt-box {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 15px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prompt-box p {
+  margin: 0;
+  padding: 0;
+}
+
+.placeholder-text {
+  color: #999;
+  font-style: italic;
+}
+
 .board {
   display: flex;
   flex-direction: column;
   border: 2px solid #333;
   border-radius: 4px;
   overflow: hidden;
+  margin-bottom: 15px;
 }
 
 .board-row {
@@ -58,6 +83,12 @@ h1 {
 
 .board-row.completed {
   background-color: #e6ffe6;
+}
+
+.board-row.selected {
+  background-color: #e6f0ff;
+  border: 2px solid #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
 }
 
 .board-cell {
@@ -94,19 +125,13 @@ h1 {
   border-right: none;
 }
 
-.prompt-box {
-  padding: 15px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
 .input-box {
   display: flex;
   gap: 10px;
   margin: 15px 0;
+  width: 100%;
+  max-width: 500px;
+  justify-content: center;
 }
 
 .input-box input {
