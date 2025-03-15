@@ -1,0 +1,8 @@
+# Ignore all text files
+*.txt
+
+# Ignore virtual env
+.venv/
+.magicsq/
+/magicsq-frontend/node_modules/
+/magicsq-frontend/build/
