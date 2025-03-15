@@ -3,3 +3,4 @@
 
 # Ignore virtual env
 .venv/
+.magicsq/
